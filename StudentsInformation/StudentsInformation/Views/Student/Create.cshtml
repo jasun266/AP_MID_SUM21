@@ -1,0 +1,21 @@
+﻿@model StudentsInformation.Models.Student
+@{
+	ViewBag.Title = "Create";
+}
+
+<h2>ADD Student</h2>
+<div>
+	<form action="/Student/Create" method="post">
+		<input type="text" name="Name" class="form-control" placeholder="Jasun">
+		@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+		<input type="date" name="DOB" class="form-control" placeholder="10-12-1998..">
+		@Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+		<input type="text" name="Credit" class="form-control" placeholder="101">
+		@Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+		<input type="text" name="CGPA" class="form-control" placeholder="3.74" />
+		@Html.ValidationMessageFor(model => model.CGPA, "", new { @class = "text-danger" })
+		<input type="text" name="Dept_id" class="form-control" placeholder="101" />
+		@Html.ValidationMessageFor(model => model.Dept_id, "", new { @class = "text-danger" })
+		<input type="submit" class="btn btn-block" value="Add" />
+	</form>
+</div>
