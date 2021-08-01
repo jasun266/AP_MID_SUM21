@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccountInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="Int32" Nullable="false" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="Int32" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_AccountInfo" FromRole="AccountInfo" ToRole="Address" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK_Category_AccountInfo" FromRole="AccountInfo" ToRole="Category" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_AccountInfo" FromRole="AccountInfo" ToRole="Comment" />
+    <NavigationProperty Name="Emails" Relationship="Self.FK_Email_AccountInfo1" FromRole="AccountInfo" ToRole="Email" />
+    <NavigationProperty Name="Phones" Relationship="Self.FK_Phone_AccountInfo1" FromRole="AccountInfo" ToRole="Phone" />
+    <NavigationProperty Name="ReviewInfoes" Relationship="Self.FK_ReviewInfo_AccountInfo" FromRole="AccountInfo" ToRole="ReviewInfo" />
+    <NavigationProperty Name="Shops" Relationship="Self.FK_Shop_AccountInfo" FromRole="AccountInfo" ToRole="Shop" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Thana" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Advertiser_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountInfo" Relationship="Self.FK_Address_AccountInfo" FromRole="Address" ToRole="AccountInfo" />
+    <NavigationProperty Name="adds" Relationship="Self.FK_adds_Address" FromRole="Address" ToRole="adds" />
+  </EntityType>
+  <EntityType Name="add">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="advertiser_id" Type="Int32" Nullable="false" />
+    <Property Name="Category_id" Type="Int32" Nullable="false" />
+    <Property Name="Shop_id" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Address" Relationship="Self.FK_adds_Address" FromRole="adds" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Add_PID" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AccountInfo" Relationship="Self.FK_Category_AccountInfo" FromRole="Category" ToRole="AccountInfo" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountInfo" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AccountInfo1" Relationship="Self.FK_Comment_AccountInfo" FromRole="Comment" ToRole="AccountInfo" />
+    <NavigationProperty Name="ReviewInfoes" Relationship="Self.FK_ReviewInfo_Comment" FromRole="Comment" ToRole="ReviewInfo" />
+  </EntityType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountInfo" Relationship="Self.FK_Email_AccountInfo1" FromRole="Email" ToRole="AccountInfo" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+    <Property Name="Address_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountInfo" Relationship="Self.FK_Phone_AccountInfo1" FromRole="Phone" ToRole="AccountInfo" />
+  </EntityType>
+  <EntityType Name="ReviewInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountInfo" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Offer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Commnentinfo" Type="Int32" Nullable="false" />
+    <Property Name="DescriptionInfo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AccountInfo1" Relationship="Self.FK_ReviewInfo_AccountInfo" FromRole="ReviewInfo" ToRole="AccountInfo" />
+    <NavigationProperty Name="Comment" Relationship="Self.FK_ReviewInfo_Comment" FromRole="ReviewInfo" ToRole="Comment" />
+    <NavigationProperty Name="Shops" Relationship="Self.FK_Shop_ReviewInfo" FromRole="ReviewInfo" ToRole="Shop" />
+  </EntityType>
+  <EntityType Name="Shop">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountInfo" Type="Int32" Nullable="false" />
+    <Property Name="ReviewInfo" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AccountInfo1" Relationship="Self.FK_Shop_AccountInfo" FromRole="Shop" ToRole="AccountInfo" />
+    <NavigationProperty Name="ReviewInfo1" Relationship="Self.FK_Shop_ReviewInfo" FromRole="Shop" ToRole="ReviewInfo" />
+  </EntityType>
+  <Association Name="FK_Address_AccountInfo">
+    <End Role="AccountInfo" Type="Self.AccountInfo" Multiplicity="1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="Advertiser_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_AccountInfo">
+    <End Role="AccountInfo" Type="Self.AccountInfo" Multiplicity="1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="Add_PID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_AccountInfo">
+    <End Role="AccountInfo" Type="Self.AccountInfo" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="AccountInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Email_AccountInfo1">
+    <End Role="AccountInfo" Type="Self.AccountInfo" Multiplicity="1" />
+    <End Role="Email" Type="Self.Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="Address_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_AccountInfo1">
+    <End Role="AccountInfo" Type="Self.AccountInfo" Multiplicity="1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="Address_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewInfo_AccountInfo">
+    <End Role="AccountInfo" Type="Self.AccountInfo" Multiplicity="1" />
+    <End Role="ReviewInfo" Type="Self.ReviewInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ReviewInfo">
+        <PropertyRef Name="AccountInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shop_AccountInfo">
+    <End Role="AccountInfo" Type="Self.AccountInfo" Multiplicity="1" />
+    <End Role="Shop" Type="Self.Shop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Shop">
+        <PropertyRef Name="AccountInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_adds_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="1" />
+    <End Role="adds" Type="Self.add" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="adds">
+        <PropertyRef Name="Address_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewInfo_Comment">
+    <End Role="Comment" Type="Self.Comment" Multiplicity="1" />
+    <End Role="ReviewInfo" Type="Self.ReviewInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ReviewInfo">
+        <PropertyRef Name="Commnentinfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shop_ReviewInfo">
+    <End Role="ReviewInfo" Type="Self.ReviewInfo" Multiplicity="1" />
+    <End Role="Shop" Type="Self.Shop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReviewInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Shop">
+        <PropertyRef Name="ReviewInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FHEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountInfoes" EntityType="Self.AccountInfo" />
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="adds" EntityType="Self.add" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Emails" EntityType="Self.Email" />
+    <EntitySet Name="Phones" EntityType="Self.Phone" />
+    <EntitySet Name="ReviewInfoes" EntityType="Self.ReviewInfo" />
+    <EntitySet Name="Shops" EntityType="Self.Shop" />
+    <AssociationSet Name="FK_Address_AccountInfo" Association="Self.FK_Address_AccountInfo">
+      <End Role="AccountInfo" EntitySet="AccountInfoes" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_AccountInfo" Association="Self.FK_Category_AccountInfo">
+      <End Role="AccountInfo" EntitySet="AccountInfoes" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_AccountInfo" Association="Self.FK_Comment_AccountInfo">
+      <End Role="AccountInfo" EntitySet="AccountInfoes" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Email_AccountInfo1" Association="Self.FK_Email_AccountInfo1">
+      <End Role="AccountInfo" EntitySet="AccountInfoes" />
+      <End Role="Email" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_AccountInfo1" Association="Self.FK_Phone_AccountInfo1">
+      <End Role="AccountInfo" EntitySet="AccountInfoes" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewInfo_AccountInfo" Association="Self.FK_ReviewInfo_AccountInfo">
+      <End Role="AccountInfo" EntitySet="AccountInfoes" />
+      <End Role="ReviewInfo" EntitySet="ReviewInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shop_AccountInfo" Association="Self.FK_Shop_AccountInfo">
+      <End Role="AccountInfo" EntitySet="AccountInfoes" />
+      <End Role="Shop" EntitySet="Shops" />
+    </AssociationSet>
+    <AssociationSet Name="FK_adds_Address" Association="Self.FK_adds_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="adds" EntitySet="adds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewInfo_Comment" Association="Self.FK_ReviewInfo_Comment">
+      <End Role="Comment" EntitySet="Comments" />
+      <End Role="ReviewInfo" EntitySet="ReviewInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shop_ReviewInfo" Association="Self.FK_Shop_ReviewInfo">
+      <End Role="ReviewInfo" EntitySet="ReviewInfoes" />
+      <End Role="Shop" EntitySet="Shops" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,71 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.na {
+			text-decoration: none;
+			color: white;
+		}
+	</style>
+	<title>@Page.Title</title>
+	@RenderSection("head", required: false)
+
+	<link href="~/Content/bootstrap.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse" style="">
+		<div class="container-fluid">
+			&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp; &nbsp;  &nbsp;
+			<span style="margin-left:auto; margin-right:0; color:white ;font-size: 18px;">
+				<b style="font-size: 40px;">FeedHub</b>
+			</span>
+
+			<ul class="nav navbar-nav">
+				<li>@Html.ActionLink("All Ads", "AllAds", "advertiser", null, new { @class = "ht" })</li>
+				<li>
+					@if (Session["Id"] != null)
+					{
+						<a href="/advertiser/PostAd" class="ht">Post an Ad</a>
+
+
+					}
+				</li>
+				<li>
+					@if (Session["Id"] != null)
+					{
+						@Html.ActionLink("All Category", "Index", "advertiser", null, new { @class = "ht", })
+
+
+					}
+				</li>
+
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li>
+					@if (Session["Id"] != null)
+					{
+						@Html.ActionLink("Sign Out", "Signout", "advertiser", null, new { @class = "ht" })
+					}
+					else
+					{
+						@Html.ActionLink("Sign In", "login", "advertiser", null, new { @class = "ht", })
+
+					}
+
+				<li>
+			</ul>
+		</div>
+
+
+	</nav>
+
+	@RenderBody()
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReviewHubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="advertise_categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="advertise_comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdvertiseId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Text" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="advertise_locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdvertiseId" Type="int" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="255" />
+    <Property Name="City" Type="varchar" MaxLength="255" />
+    <Property Name="Street" Type="varchar" MaxLength="255" />
+    <Property Name="Zip" Type="varchar" MaxLength="255" />
+    <Property Name="Lat" Type="int" />
+    <Property Name="Lon" Type="int" />
+    <Property Name="Additional" Type="text" />
+  </EntityType>
+  <EntityType Name="advertise_reacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdvertiseId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="advertisers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CompanyCategoryId" Type="int" />
+    <Property Name="PaymentId" Type="int" />
+  </EntityType>
+  <EntityType Name="advertises">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Image" Type="varchar" MaxLength="255" />
+    <Property Name="Created_at" Type="datetime" Nullable="false" />
+    <Property Name="ExpirationDate" Type="datetime" />
+    <Property Name="Views" Type="int" />
+    <Property Name="AdvertiseCategoryId" Type="int" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="company_categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="review_comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Text" Type="text" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ReviewHub.dbo.review_reacts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="review_reacts">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ReviewId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reviews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Image" Type="varchar" MaxLength="255" />
+    <Property Name="Created_at" Type="datetime" Nullable="false" />
+    <Property Name="Views" Type="int" />
+    <Property Name="AdvertiseId" Type="int" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="255" />
+    <Property Name="City" Type="varchar" MaxLength="255" />
+    <Property Name="Street" Type="varchar" MaxLength="255" />
+    <Property Name="Zip" Type="varchar" MaxLength="50" />
+    <Property Name="Lat" Type="int" />
+    <Property Name="Lon" Type="int" />
+    <Property Name="Additional" Type="text" />
+  </EntityType>
+  <EntityType Name="user_types">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="255" />
+    <Property Name="About" Type="text" />
+    <Property Name="Joined_at" Type="datetime" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_advertise_comments_advertises">
+    <End Role="advertises" Type="Self.advertises" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="advertise_comments" Type="Self.advertise_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="advertises">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertise_comments">
+        <PropertyRef Name="AdvertiseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertise_comments_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="advertise_comments" Type="Self.advertise_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertise_comments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertise_locations_advertises">
+    <End Role="advertises" Type="Self.advertises" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="advertise_locations" Type="Self.advertise_locations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="advertises">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertise_locations">
+        <PropertyRef Name="AdvertiseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertise_reacts_advertises">
+    <End Role="advertises" Type="Self.advertises" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="advertise_reacts" Type="Self.advertise_reacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="advertises">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertise_reacts">
+        <PropertyRef Name="AdvertiseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertise_reacts_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="advertise_reacts" Type="Self.advertise_reacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertise_reacts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertisers_company_categories">
+    <End Role="company_categories" Type="Self.company_categories" Multiplicity="0..1" />
+    <End Role="advertisers" Type="Self.advertisers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="company_categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertisers">
+        <PropertyRef Name="CompanyCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertisers_users">
+    <End Role="users" Type="Self.users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="advertisers" Type="Self.advertisers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertisers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertises_advertise_categories">
+    <End Role="advertise_categories" Type="Self.advertise_categories" Multiplicity="0..1" />
+    <End Role="advertises" Type="Self.advertises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="advertise_categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertises">
+        <PropertyRef Name="AdvertiseCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_advertises_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="advertises" Type="Self.advertises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="advertises">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_review_comments_reviews">
+    <End Role="reviews" Type="Self.reviews" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="review_comments" Type="Self.review_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reviews">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="review_comments">
+        <PropertyRef Name="ReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_review_reacts_reviews">
+    <End Role="reviews" Type="Self.reviews" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="review_reacts" Type="Self.review_reacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reviews">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="review_reacts">
+        <PropertyRef Name="ReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_review_reacts_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="review_reacts" Type="Self.review_reacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="review_reacts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reviews_advertises">
+    <End Role="advertises" Type="Self.advertises" Multiplicity="0..1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="advertises">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="AdvertiseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reviews_users">
+    <End Role="users" Type="Self.users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_locations_users">
+    <End Role="users" Type="Self.users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="user_locations" Type="Self.user_locations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="user_locations">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_review_comments">
+    <End Role="review_comments" Type="Self.review_comments" Multiplicity="1" />
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="review_comments">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_user_types">
+    <End Role="user_types" Type="Self.user_types" Multiplicity="1" />
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_types">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ReviewHubModelStoreContainer">
+    <EntitySet Name="advertise_categories" EntityType="Self.advertise_categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="advertise_comments" EntityType="Self.advertise_comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="advertise_locations" EntityType="Self.advertise_locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="advertise_reacts" EntityType="Self.advertise_reacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="advertisers" EntityType="Self.advertisers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="advertises" EntityType="Self.advertises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="company_categories" EntityType="Self.company_categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="review_comments" EntityType="Self.review_comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reviews" EntityType="Self.reviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_locations" EntityType="Self.user_locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_types" EntityType="Self.user_types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="review_reacts" EntityType="Self.review_reacts" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [review_reacts].[Id] AS [Id], 
+    [review_reacts].[ReviewId] AS [ReviewId], 
+    [review_reacts].[UserId] AS [UserId]
+    FROM [dbo].[review_reacts] AS [review_reacts]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_advertise_comments_advertises" Association="Self.FK_advertise_comments_advertises">
+      <End Role="advertises" EntitySet="advertises" />
+      <End Role="advertise_comments" EntitySet="advertise_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertise_comments_users" Association="Self.FK_advertise_comments_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="advertise_comments" EntitySet="advertise_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertise_locations_advertises" Association="Self.FK_advertise_locations_advertises">
+      <End Role="advertises" EntitySet="advertises" />
+      <End Role="advertise_locations" EntitySet="advertise_locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertise_reacts_advertises" Association="Self.FK_advertise_reacts_advertises">
+      <End Role="advertises" EntitySet="advertises" />
+      <End Role="advertise_reacts" EntitySet="advertise_reacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertise_reacts_users" Association="Self.FK_advertise_reacts_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="advertise_reacts" EntitySet="advertise_reacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertisers_company_categories" Association="Self.FK_advertisers_company_categories">
+      <End Role="company_categories" EntitySet="company_categories" />
+      <End Role="advertisers" EntitySet="advertisers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertisers_users" Association="Self.FK_advertisers_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="advertisers" EntitySet="advertisers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertises_advertise_categories" Association="Self.FK_advertises_advertise_categories">
+      <End Role="advertise_categories" EntitySet="advertise_categories" />
+      <End Role="advertises" EntitySet="advertises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_advertises_users" Association="Self.FK_advertises_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="advertises" EntitySet="advertises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_review_comments_reviews" Association="Self.FK_review_comments_reviews">
+      <End Role="reviews" EntitySet="reviews" />
+      <End Role="review_comments" EntitySet="review_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_review_reacts_reviews" Association="Self.FK_review_reacts_reviews">
+      <End Role="reviews" EntitySet="reviews" />
+      <End Role="review_reacts" EntitySet="review_reacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_review_reacts_users" Association="Self.FK_review_reacts_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="review_reacts" EntitySet="review_reacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reviews_advertises" Association="Self.FK_reviews_advertises">
+      <End Role="advertises" EntitySet="advertises" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reviews_users" Association="Self.FK_reviews_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_locations_users" Association="Self.FK_user_locations_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="user_locations" EntitySet="user_locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_review_comments" Association="Self.FK_users_review_comments">
+      <End Role="review_comments" EntitySet="review_comments" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_user_types" Association="Self.FK_users_user_types">
+      <End Role="user_types" EntitySet="user_types" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

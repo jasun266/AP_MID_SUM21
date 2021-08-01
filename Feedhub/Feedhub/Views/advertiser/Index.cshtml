@@ -1,0 +1,105 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<Feedhub.Models.Category>
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>View  Category</title>
+	<link href="~/Content/paginition.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/d4036902fd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div id="nav_bar" style="background-color:#caefff; height: 70px; width: 100%; font-family: arial; display: flex; align-items: center; text-align: center;">
+
+		&nbsp; &nbsp;  &nbsp;
+		<a href="/advertiser/Index" class="btn btn-primary">All Category</a>
+		&nbsp; &nbsp;  &nbsp;
+		<a href="/advertiser/Index" class="btn btn-primary">All Product</a>
+		&nbsp; &nbsp;  &nbsp;
+		<a href="/advertiser/Create" class="btn btn-primary">ADD Category</a>
+		&nbsp; &nbsp;  &nbsp;
+		<a href="/advertiser/PostAd" class="btn btn-primary">Post an Ad</a>
+
+		<span style="margin-left:auto; margin-right:0; font-size: 18px;">
+			<b style="font-size: 40px;">FeedHub</b>
+		</span>
+
+		<span style="margin-left:auto; margin-right:0;">
+
+			<a href="/advertiser/Index" style="text-decoration: none;">
+				<i title="All Category" class="fas fa-home" style="font-size:30px; color: black;"></i>
+			</a>
+
+			&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+			<a href="signin.php" style="text-decoration: none;">
+				<i title="sign out" class="fas fa-sign-out-alt" style="font-size:35px; color:black;"></i>
+			</a>
+			&nbsp; &nbsp; &nbsp; &nbsp;
+		</span>
+
+
+
+
+	</div>
+	<div>
+		@using (@Html.BeginForm("Ads", "advertiser"))
+		{
+			<div class="navbar-form ">
+				<div class="form-group">
+
+					<input type="text" class="form-control" placeholder="Search" name="search" id="search">
+				</div>
+				<button type="submit" class="btn btn-success">Search</button>
+			</div>
+		}
+	</div>
+
+
+	<div class="row" style="margin-bottom:40px">
+		@if (Model != null)
+		{
+			foreach (var item in Model)
+			{
+				<div class="col-lg-4 col-md-4" style="height:200px;margin-top:100px">
+
+					<img class="img img-responsive cimg" src="@Url.Content(item.Image)" style=" height:100%;width:100% ;border-radius:50px 50px 50px 50px" />
+					<h4 style="color:#808080; font-family:'Arial Rounded MT';text-align:center"> @Html.ActionLink(@item.Name, "Ads", new { id = @item.ID })</h4>
+
+				</div>
+
+			}
+		}
+
+
+
+
+
+
+
+
+	</div>
+
+
+	</div>
+
+	<div id="container" style="margin-left: 20px">
+		<p></p>
+		<p></p>
+		<div class="pagination" style="margin-left: 400px">
+			Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+			of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+		</div>
+	</div>
+</body>
+</html>
+
+
